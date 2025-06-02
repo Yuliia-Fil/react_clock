@@ -25,13 +25,13 @@ export class App extends React.PureComponent<{}, State> {
     document.addEventListener('contextmenu', (event: MouseEvent) => {
       event.preventDefault();
       this.setState({ hasClock: false });
-      document.addEventListener('click', () => {
-        this.setState({ hasClock: true });
-      });
-      this.timerId = window.setInterval(() => {
-        this.setState({ clockName: getRandomName() });
-      }, 3300);
     });
+    document.addEventListener('click', () => {
+      this.setState({ hasClock: true });
+    });
+    this.timerId = window.setInterval(() => {
+      this.setState({ clockName: getRandomName() });
+    }, 3300);
   }
 
   componentWillUnmount(): void {
