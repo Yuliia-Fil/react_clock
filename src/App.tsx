@@ -19,9 +19,7 @@ export class App extends React.PureComponent<{}, State> {
     clockName: `Clock-0`,
   };
 
-  timerId = window.setInterval(() => {
-    this.setState({ clockName: getRandomName() });
-  }, 3300);
+  timerId: number | undefined;
 
   componentDidMount(): void {
     document.addEventListener('contextmenu', (event: MouseEvent) => {
@@ -30,7 +28,14 @@ export class App extends React.PureComponent<{}, State> {
       document.addEventListener('click', () => {
         this.setState({ hasClock: true });
       });
+      this.timerId = window.setInterval(() => {
+        this.setState({ clockName: getRandomName() });
+      }, 3300);
     });
+  }
+
+  componentWillUnmount(): void {
+    window.clearInterval(this.timerId);
   }
 
   render() {
